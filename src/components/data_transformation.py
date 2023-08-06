@@ -108,7 +108,7 @@ class DataTransformation:
                 obj=preprocessing_obj
                 )
 
-            logging.info("Preproccsing Pickel File Save")    
+            logging.info("Preprocessing Pickle File Save")    
 
             return (
                 train_arr,
@@ -116,7 +116,7 @@ class DataTransformation:
                 self.data_transformation_config.preprocessor_obj_file_path,
             )
         except Exception as e:
-            logging.info("Error Occured In Data Transformation Class")
+            logging.info("Error Occurred In Data Transformation Class")
             raise CustomException(e,sys)
 
 
