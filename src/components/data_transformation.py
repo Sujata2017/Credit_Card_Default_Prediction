@@ -13,6 +13,10 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder,StandardScaler
 from src.utils import save_object
 
+import warnings
+warnings.filterwarnings("ignore")
+
+
 @dataclass
 class DataTransformationConfig:
     preprocessor_obj_file_path=os.path.join('artifacts',"preprocessor.pkl")
@@ -28,11 +32,15 @@ class DataTransformation:
         '''
         try:
             logging.info("Data Transformation Started")
-            numerical_columns = ['SEX', 'EDUCATION', 'AGE', 'PAY_0', 'PAY_2', 'PAY_3', 'PAY_4', 'PAY_5', 'PAY_6']
+            #numerical_columns = ['SEX', 'EDUCATION', 'AGE', 'PAY_0', 'PAY_2', 'PAY_3', 'PAY_4', 'PAY_5', 'PAY_6']
+            numerical_columns=['LIMIT_BAL', 'SEX', 'EDUCATION', 'MARRIAGE', 'AGE', 'PAY_0', 'PAY_2',
+       'PAY_3', 'PAY_4', 'PAY_5', 'PAY_6', 'BILL_AMT1', 'BILL_AMT2',
+       'BILL_AMT3', 'BILL_AMT4', 'BILL_AMT5', 'BILL_AMT6', 'PAY_AMT1',
+       'PAY_AMT2', 'PAY_AMT3', 'PAY_AMT4', 'PAY_AMT5', 'PAY_AMT6']
             
             logging.info("Pipline Started")
 
-            ## nmerical pipline
+            ## numerical pipline
             num_pipeline= Pipeline(
                 steps=[
                 ("imputer",SimpleImputer(strategy="median")),
@@ -40,6 +48,9 @@ class DataTransformation:
 
                 ]
             )
+            
+            logging.info(f"Numerical columns: {numerical_columns}")
+
 
             # get Preprocessor obj
             preprocessor=ColumnTransformer(
@@ -72,12 +83,8 @@ class DataTransformation:
 
             preprocessing_obj=self.get_data_transformer_object()
 
-            #target_column_name="math_score"
             target_column_name = "default.payment.next.month"
-            #drop_column = [target_columns_name]
-
-            #numerical_columns = ["writing_score", "reading_score"]
-
+            
 
             ## Split dependent nd independent features
             input_feature_train_df=train_df.drop(columns=[target_column_name],axis=1)
