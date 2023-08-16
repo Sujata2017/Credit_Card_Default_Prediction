@@ -13,3 +13,6 @@ Installing
 
 * Run Application
 - python app.py
+
+* To run the Flask app
+- https://brown-engineer-aldnu.ineuron.app:5000/predictdata

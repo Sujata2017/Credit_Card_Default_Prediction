@@ -33,6 +33,9 @@ class ModelTrainer:
                 test_array[:,-1]
             )
 
+            print(X_train)
+            print(y_train)
+
 
             models = {
                 "Random Forest": RandomForestClassifier(),
